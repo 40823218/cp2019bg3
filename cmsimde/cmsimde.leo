@@ -245,6 +245,8 @@ if __name__ == "__main__":
 
 from flask import Flask, send_from_directory, request, redirect, \
     render_template, session, make_response, url_for, flash
+# python -m pip install flask_cors
+from flask_cors import CORS
 import random
 import math
 import os
@@ -298,6 +300,7 @@ uwsgi = init.Init.uwsgi
 
 # 必須先將 download_dir 設為 static_folder, 然後才可以用於 download 方法中的 app.static_folder 的呼叫
 app = Flask(__name__)
+CORS(app, support_credentials=False)
 
 # 設置隨後要在 blueprint 應用程式中引用的 global 變數
 app.config['config_dir'] = config_dir
@@ -2211,7 +2214,7 @@ def ssavePage():
 &lt;link type="text/css" rel="stylesheet" href="/static/syntaxhighlighter/css/shCoreDefault.css"/&gt;
 &lt;script type="text/javascript"&gt;SyntaxHighlighter.all();&lt;/script&gt;
 
-&lt;!-- for LaTeX equations 暫時不用
+&lt;!-- 啟用 LaTeX equations 編輯 --&gt;
     &lt;script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"&gt;&lt;/script&gt;
     &lt;script type="text/javascript"&gt;
     init_mathjax = function() {
@@ -2232,7 +2235,6 @@ def ssavePage():
     }
     init_mathjax();
     &lt;/script&gt;
- --&gt;
  &lt;!-- 暫時不用
 &lt;script src="/static/fengari-web.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="/static/Cango-13v08-min.js"&gt;&lt;/script&gt;
@@ -2243,6 +2245,11 @@ def ssavePage():
 &lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;
 &lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;
 --&gt;
+&lt;style&gt;
+img.add_border {
+    border: 3px solid blue;
+}
+&lt;/style&gt;
 '''
 
 
@@ -2266,7 +2273,7 @@ def ssavePage():
 &lt;link type="text/css" rel="stylesheet" href="./../cmsimde/static/syntaxhighlighter/css/shCoreDefault.css"/&gt;
 &lt;script type="text/javascript"&gt;SyntaxHighlighter.all();&lt;/script&gt;
 
-&lt;!-- for LaTeX equations 暫時不用
+&lt;!-- 啟用 LaTeX equations 編輯 --&gt;
 &lt;script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"&gt;&lt;/script&gt;
 &lt;script type="text/javascript"&gt;
 init_mathjax = function() {
@@ -2287,7 +2294,7 @@ init_mathjax = function() {
 }
 init_mathjax();
 &lt;/script&gt;
---&gt;
+
 &lt;!-- 暫時不用
 &lt;script src="./../cmsimde/static/fengari-web.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="./../cmsimde/static/Cango-13v08-min.js"&gt;&lt;/script&gt;
@@ -2298,6 +2305,11 @@ init_mathjax();
 &lt;script src="https://scrum-3.github.io/web/brython/brython.js"&gt;&lt;/script&gt;
 &lt;script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"&gt;&lt;/script&gt;
 --&gt;
+&lt;style&gt;
+img.add_border {
+    border: 3px solid blue;
+}
+&lt;/style&gt;
 '''
 
 
